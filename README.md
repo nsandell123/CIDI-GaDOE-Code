@@ -2,7 +2,7 @@
 Consists of VBA macros and python scripts that were used in the automation of a manual data entry process
 
 **FindNewUsers.vb**
-Constraints - You can only hae two weeks worth of Users sheets present in the workbook. You have to clean the Users Sheet before applying this macro. 
+Constraints - You can only have two weeks worth of Users sheets present in the workbook. You have to clean the Users Sheet before applying this macro. 
 Functionalities
 1. Displays new users in message box
 2. Modifies Users Weekly Sheet and Users Monthly Sheet with updated values
