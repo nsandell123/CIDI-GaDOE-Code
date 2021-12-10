@@ -4,9 +4,10 @@ Sub RequestsFormatting()
 '
 
 '
-    Rows("1:1").Select
+
+    Worksheets(sheetNames(2)).Select
+    Worksheets(sheetNames(2)).Rows("1:1").Select
     Selection.Font.Bold = True
-    Cells.Select
     Selection.RowHeight = 15
     Selection.ColumnWidth = 15
 End Sub
@@ -16,10 +17,9 @@ Sub UsersFormatting()
 '
 
 '
-    Rows("1:1").Select
+    Worksheets(sheetNames(5)).Select
+    Worksheets(sheetNames(5)).Rows("1:1").Select
     Selection.Font.Bold = True
-    Cells.Select
     Selection.RowHeight = 15
     Selection.ColumnWidth = 20
-    Range("E4").Select
 End Sub
