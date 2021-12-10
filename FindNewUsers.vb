@@ -1,30 +1,13 @@
 Sub FindNewUsers()
 
-    Dim mainworkBook As Workbook
-    Dim firstSheet As String
-    Dim secondSheet As String
-    Dim flag As Boolean
-
-    Set mainworkBook = ActiveWorkbook
-    For i = 1 To mainworkBook.Sheets.Count
-        If InStr(LCase(mainworkBook.Sheets(i).Name), "user") <> 0 And InStr(LCase(mainworkBook.Sheets(i).Name), "ga") <> 0 And Not (flag) Then
-           firstSheet = mainworkBook.Sheets(i).Name
-           flag = True
-
-        End If
-        If InStr(LCase(mainworkBook.Sheets(i).Name), "user") <> 0 And InStr(LCase(mainworkBook.Sheets(i).Name), "ga") <> 0 And (flag) Then
-            secondSheet = mainworkBook.Sheets(i).Name
-
-        End If
-    Next i
-    LRowFirst = Worksheets(firstSheet).Cells(Rows.Count, "A").End(xlUp).Row
-    LRowSecond = Worksheets(secondSheet).Cells(Rows.Count, "A").End(xlUp).Row
-
+    LRowFirst = Worksheets(sheetNames(4)).Cells(Rows.Count, "A").End(xlUp).Row
+    LRowSecond = Worksheets(sheetNames(5)).Cells(Rows.Count, "A").End(xlUp).Row
+    
     Dim Rng1 As Range
     Dim Rng2 As Range
 
-    Set Rng1 = Worksheets(firstSheet).Range("A1:" + "A" + Right(Str(LRowFirst), Len(LRowFirst)))
-    Set Rng2 = Worksheets(secondSheet).Range("A1:" + "A" + Right(Str(LRowSecond), Len(LRowSecond)))
+    Set Rng1 = Worksheets(sheetNames(4)).Range("A1:" + "A" + Right(str(LRowFirst), Len(LRowFirst)))
+    Set Rng2 = Worksheets(sheetNames(5)).Range("A1:" + "A" + Right(str(LRowSecond), Len(LRowSecond)))
 
     Dim cellplaceholder As Range
     Dim counter As Long
@@ -39,35 +22,24 @@ Sub FindNewUsers()
         finalString = "No new users"
     End If
 
-    Dim userSheet1 As String
-    Dim userSheet2 As String
-    For i = 1 To mainworkBook.Sheets.Count
-        If InStr(LCase(mainworkBook.Sheets(i).Name), "users") <> 0 And InStr(LCase(mainworkBook.Sheets(i).Name), "weekly") <> 0 Then
-           userSheet1 = mainworkBook.Sheets(i).Name
-
-        End If
-        If InStr(LCase(mainworkBook.Sheets(i).Name), "user") <> 0 And InStr(LCase(mainworkBook.Sheets(i).Name), "monthly") <> 0 Then
-            userSheet2 = mainworkBook.Sheets(i).Name
-
-        End If
-    Next i
+    MsgBox finalString
+    
 
 
-    LastRowWeekly = Worksheets(userSheet1).Cells(Rows.Count, "B").End(xlUp).Row
-    LastRowMonthly = Worksheets(userSheet2).Cells(Rows.Count, "B").End(xlUp).Row
+    LastRowWeekly = Worksheets(sheetNames(9)).Cells(Rows.Count, "B").End(xlUp).Row
+    LastRowMonthly = Worksheets(sheetNames(8)).Cells(Rows.Count, "B").End(xlUp).Row
 
     Dim myValue As Variant
     myValue = InputBox("What is today's date? (MM/DD/YYYY)")
+    
+    Worksheets(sheetNames(8)).Cells(LastRowMonthly, "B") = str(CLng(Worksheets(sheetNames(8)).Cells(LastRowMonthly, "B")) + counter)
 
-    Worksheets(userSheet2).Cells(LastRowMonthly, "B") = Str(CLng(Worksheets(userSheet2).Cells(LastRowMonthly, "B")) + counter)
-
-    Worksheets(userSheet1).Cells(LastRowWeekly + 1, "B") = Worksheets(userSheet1).Cells(LastRowWeekly, "B") + counter
-
-    Worksheets(userSheet1).Cells(LastRowWeekly + 1, "A") = myValue
-    Worksheets(userSheet1).Cells(LastRowWeekly + 1, "A").HorizontalAlignment = xlRight
+    Worksheets(sheetNames(9)).Cells(LastRowWeekly + 1, "B") = Worksheets(sheetNames(9)).Cells(LastRowWeekly, "B") + counter
+    Worksheets(sheetNames(9)).Cells(LastRowWeekly + 1, "A") = myValue
+    Worksheets(sheetNames(9)).Cells(LastRowWeekly + 1, "A").HorizontalAlignment = xlRight
 
 
-    MsgBox finalString
+    
 
 
 
@@ -76,3 +48,4 @@ Sub FindNewUsers()
 
 
 End Sub
+
