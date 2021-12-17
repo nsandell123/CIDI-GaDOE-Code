@@ -1,4 +1,4 @@
-Option Explicit On
+Option Explicit 
 Global sheetNames(12) As String
 Global mainWorkbook As Workbook
 Sub GlobalChecking()
