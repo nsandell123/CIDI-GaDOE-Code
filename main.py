@@ -9,7 +9,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import glob
 from selenium.webdriver.common.by import By
+import win32com.client as win32
 os.environ['PATH'] += r";C:\SeleniumDriver"
+excel = win32.gencache.EnsureDispatch('Excel.Application')
+excel.Visible = True
 
 ### Initial Scraping
 
@@ -69,7 +72,7 @@ wb = load_workbook(filename='insert.xlsm', read_only=False, keep_vba=True)
 
 ws_requests = wb.create_sheet(index=1)
 ws_requests.title = "GA DoE Requests - " + date
-ws_users = wb.create_sheet(index=4)
+ws_users = wb.create_sheet(index=3)
 ws_users.title = "GA DoE Users - " + date
 
 for row in dataframe_to_rows(df_requests, index=True, header=True):
@@ -83,9 +86,17 @@ for row in dataframe_to_rows(df_users, index=True, header=True):
 ws_users.delete_rows(2)
 ws_users.delete_cols(1)
 
-
-wb.remove(wb[wb.sheetnames[3]])
 wb.remove(wb[wb.sheetnames[5]])
 
 new_file_name = os.getcwd() + "\\" + "Combined Data " + date + ".xlsm"
 wb.save(filename=new_file_name)
+
+
+
+macro_wb = excel.Workbooks.Open(new_file_name)
+excel.Run("\'" + new_file_name + "\'" + "!Module1.GlobalChecking")
+excel.Run("\'" + new_file_name + "\'" + "!Module2.RequestsFormatting")
+excel.Run("\'" + new_file_name + "\'" + "!Module2.UsersFormatting")
+excel.Run("\'" + new_file_name + "\'" + "!Module3.UsersDataCleaning")
+excel.Run("\'" + new_file_name + "\'" + "!Module4.FindNewUsers")
+excel.Run("\'" + new_file_name + "\'" + "!Module5.FindRequestsDiff")
