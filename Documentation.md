@@ -3,14 +3,14 @@ Macros
 - Creates a global variable called sheetNames which is an array of 12 elements which holds all the references to the sheets
 
 2. Requests Formatting
-- Formats the Incoming Requests Page (GA DoE Requests - <DATE>)
+- Formats the Incoming Requests Page (GA DoE Requests - DATE)
 
 
 3. Users Formatting
-- Formats the Incoming Users Sheet (GA DoE Users - <DATE>)
+- Formats the Incoming Users Sheet (GA DoE Users - DATE)
 
 4. Users Data Cleaning
-- Deletes and Fills in Certain Data on the Incoming Users Sheet (GA DoE Users - <DATE>)
+- Deletes and Fills in Certain Data on the Incoming Users Sheet (GA DoE Users - DATE)
 
 
 5. Find New Users
