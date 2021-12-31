@@ -1,4 +1,7 @@
-Macros 
+**Workflow**
+Have a copy of the github repo and run main.py in sublime text. 
+
+**Macros** 
 1. Global Checking
 - Creates a global variable called sheetNames which is an array of 12 elements which holds all the references to the sheets
 
