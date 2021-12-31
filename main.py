@@ -47,8 +47,13 @@ export_requests.click()
 
 
 ### Collect CSV from downloads
+path = str(input("What is the location of the CDR?"))
+name = str(input("What is your account name on Windows?"))
 date = str(input("What is today's date in (MMDDYYYY)"))
-folder_path = r'C:\Users\sande\Downloads'
+#r'C:\Users\sande\Downloads'
+folder_path_base = "C:\\Users\\"
+folder_path_suffix = r"\Downloads"
+folder_path = folder_path_base + name + folder_path_suffix
 file_type = '\*csv'
 files = glob.glob(folder_path + file_type)
 
@@ -68,7 +73,7 @@ df_users = pd.read_csv(new_users_name)
 df_users.to_excel('users_output.xlsx', index=False)
 
 
-wb = load_workbook(filename='insert.xlsm', read_only=False, keep_vba=True)
+wb = load_workbook(filename=path, read_only=False, keep_vba=True)
 
 ws_requests = wb.create_sheet(index=1)
 ws_requests.title = "GA DoE Requests - " + date
