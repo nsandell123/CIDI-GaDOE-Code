@@ -49,7 +49,7 @@ export_requests.click()
 ### Collect CSV from downloads
 path = str(input("What is the location of the CDR?"))
 name = str(input("What is your account name on Windows?"))
-date = str(input("What is today's date in (MMDDYYYY)"))
+date = str(input("What is today's date in (MMDDYY)"))
 #r'C:\Users\sande\Downloads'
 folder_path_base = "C:\\Users\\"
 folder_path_suffix = r"\Downloads"
@@ -74,7 +74,9 @@ df_users.to_excel('users_output.xlsx', index=False)
 
 
 wb = load_workbook(filename=path, read_only=False, keep_vba=True)
-
+for sheet in wb.sheetnames:
+    if 'Combined Data' in sheet:
+        wb[sheet].title = 'Combined Data ' + date
 ws_requests = wb.create_sheet(index=1)
 ws_requests.title = "GA DoE Requests - " + date
 
