@@ -77,6 +77,7 @@ wb = load_workbook(filename=path, read_only=False, keep_vba=True)
 
 ws_requests = wb.create_sheet(index=1)
 ws_requests.title = "GA DoE Requests - " + date
+
 ws_users = wb.create_sheet(index=3)
 ws_users.title = "GA DoE Users - " + date
 

@@ -1,5 +1,5 @@
 **Workflow**
-Have a copy of the github repo and run main.py in sublime text. 
+Have a copy of the github repo and run main.py in sublime text. Remove one request and one user. 
 
 **Macros** 
 1. Global Checking
