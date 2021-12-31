@@ -6,8 +6,8 @@ Sub FindNewUsers()
     Dim Rng1 As Range
     Dim Rng2 As Range
 
-    Set Rng1 = Worksheets(sheetNames(4)).Range("A1:" + "A" + Right(str(LRowFirst), Len(LRowFirst)))
-    Set Rng2 = Worksheets(sheetNames(5)).Range("A1:" + "A" + Right(str(LRowSecond), Len(LRowSecond)))
+    Set Rng1 = Worksheets(sheetNames(4)).Range("A1:" + "A" + Right(Str(LRowFirst), Len(LRowFirst)))
+    Set Rng2 = Worksheets(sheetNames(5)).Range("A1:" + "A" + Right(Str(LRowSecond), Len(LRowSecond)))
 
     Dim cellplaceholder As Range
     Dim counter As Long
@@ -26,17 +26,17 @@ Sub FindNewUsers()
     
 
 
-    LastRowWeekly = Worksheets(sheetNames(9)).Cells(Rows.Count, "B").End(xlUp).Row
-    LastRowMonthly = Worksheets(sheetNames(8)).Cells(Rows.Count, "B").End(xlUp).Row
+    LastRowWeekly = Worksheets(sheetNames(8)).Cells(Rows.Count, "B").End(xlUp).Row
+    LastRowMonthly = Worksheets(sheetNames(9)).Cells(Rows.Count, "B").End(xlUp).Row
 
     Dim myValue As Variant
     myValue = InputBox("What is today's date? (MM/DD/YYYY)")
     
-    Worksheets(sheetNames(8)).Cells(LastRowMonthly, "B") = str(CLng(Worksheets(sheetNames(8)).Cells(LastRowMonthly, "B")) + counter)
+    Worksheets(sheetNames(9)).Cells(LastRowMonthly, "B") = Str(CLng(Worksheets(sheetNames(9)).Cells(LastRowMonthly, "B")) + counter)
 
-    Worksheets(sheetNames(9)).Cells(LastRowWeekly + 1, "B") = Worksheets(sheetNames(9)).Cells(LastRowWeekly, "B") + counter
-    Worksheets(sheetNames(9)).Cells(LastRowWeekly + 1, "A") = myValue
-    Worksheets(sheetNames(9)).Cells(LastRowWeekly + 1, "A").HorizontalAlignment = xlRight
+    Worksheets(sheetNames(8)).Cells(LastRowWeekly + 1, "B") = Worksheets(sheetNames(8)).Cells(LastRowWeekly, "B") + counter
+    Worksheets(sheetNames(8)).Cells(LastRowWeekly + 1, "A") = myValue
+    Worksheets(sheetNames(8)).Cells(LastRowWeekly + 1, "A").HorizontalAlignment = xlRight
 
 
     
@@ -48,4 +48,3 @@ Sub FindNewUsers()
 
 
 End Sub
-
