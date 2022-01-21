@@ -1,4 +1,5 @@
 Sub UpdateTable()
+    Worksheets(sheetNames(1)).Select
     'TxtHelp Rept
     Dim LRowFirst As Long
     LRowFirst = Worksheets(sheetNames(1)).Cells(Rows.Count, "K").End(xlUp).Row
