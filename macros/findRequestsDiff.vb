@@ -68,7 +68,7 @@ Sub findRequestsDiff()
             End If
             Dim newRowPosition As Integer
             newRowPosition = Worksheets("Loans & Consult").Cells(Rows.Count, "A").End(xlUp).Row + 1
-            Worksheets("Loans & Consult").Cells(newRowPosition, "A") = Worksheets("Loans & Consult").Cells(newRowPosition, "A") + 1
+            Worksheets("Loans & Consult").Cells(newRowPosition, "A") = Worksheets("Loans & Consult").Cells(newRowPosition - 1, "A") + 1
             Worksheets("Loans & Consult").Cells(newRowPosition, "B") = Worksheets(sheetNames(2)).Cells(requestsPointer, "B")
             Worksheets("Loans & Consult").Cells(newRowPosition, "C") = Worksheets(sheetNames(2)).Cells(requestsPointer, "C")
             Worksheets("Loans & Consult").Cells(newRowPosition, "C").NumberFormat = "M/D/YYYY"
