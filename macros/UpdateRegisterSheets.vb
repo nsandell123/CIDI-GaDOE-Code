@@ -21,6 +21,7 @@ Sub UpdateRegisterSheets()
     
     Dim cellplaceholder As Range
     Dim finalString As String
+    finalString = ""
     For Each cellplaceholder In UserRange1
         If WorksheetFunction.CountIf(UserRange2, cellplaceholder) = 0 And cellplaceholder.Value <> 0 Then
             registeredPortal = registeredPortal + 1
@@ -39,7 +40,11 @@ Sub UpdateRegisterSheets()
             End If
         End If
     Next cellplaceholder
-    
+    If finalString = "" Then
+        MsgBox "No new districts have registered in the portal"
+    Else
+        MsgBox finalString
+    End If
     Dim LRowRequests1 As Long
     Dim LRowRequests2 As Long
     LRowRequests1 = Worksheets(sheetNames(2)).Cells(Rows.Count, "M").End(xlUp).Row
@@ -59,7 +64,11 @@ Sub UpdateRegisterSheets()
             finalStringRequests = finalStringRequests + cellplaceholder.Value + cellplaceholder.Offset(0, 1).Value + vbNewLine
         End If
     Next cellplaceholder
-    
+    If finalStringRequests = "" Then
+        MsgBox "No new districts in the portal that are requesting software"
+    Else
+        MsgBox finalStringRequests
+    End If
     'In Register Monthly, you have to update the Next with the totals from Sheet 1
     Dim nextPosition As Long
     nextPosition = 7
@@ -96,7 +105,6 @@ Sub UpdateRegisterSheets()
     Set FindRow = Worksheets(sheetNames(7)).Range("B:B").Find(What:="Requested", LookIn:=xlValues)
     
     'Get the Date
-    myValue = "01/24/2022"
     Dim standardDate As Variant
     standardDate = Left(CStr(myValue), 5)
     standardDate = standardDate + " Totals"
