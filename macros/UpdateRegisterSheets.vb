@@ -77,30 +77,54 @@ Sub UpdateRegisterSheets()
         nextPosition = nextPosition + 1
     Wend
     
-    Worksheets(sheetNames(6)).Cells(nextPosition, "B").Value = Worksheets(sheetNames(6)).Cells(nextPosition, "B").Value + registeredPortal
-    Worksheets(sheetNames(6)).Cells(nextPosition, "G").Value = Worksheets(sheetNames(6)).Cells(nextPosition, "G").Value + requestedPortal
+    Worksheets(sheetNames(6)).Cells(nextPosition, "B").Value = Worksheets(sheetNames(6)).Cells(nextPosition - 1, "B").Value + registeredPortal
+    Worksheets(sheetNames(6)).Cells(nextPosition, "G").Value = Worksheets(sheetNames(6)).Cells(nextPosition - 1, "G").Value + requestedPortal
+    
+    If StrComp(Format(Date, "mmmm"), Worksheets(sheetNames(6)).Cells(nextPosition - 1, "A")) = 0 Then
+        Worksheets(sheetNames(6)).Cells(nextPosition - 1, "B").Value = Worksheets(sheetNames(6)).Cells(nextPosition, "B").Value
+        Worksheets(sheetNames(6)).Cells(nextPosition - 1, "G").Value = Worksheets(sheetNames(6)).Cells(nextPosition, "G").Value
+    End If
     
     Dim j As Long
-    
+    Set FindPortalMonth = Worksheets(sheetNames(6)).Range("C:C").Find(What:="In Portal", LookIn:=xlValues)
     For j = 0 To 3
-        Worksheets(sheetNames(6)).Cells(57 + j, "C").Value = Worksheets(sheetNames(6)).Cells(57 + j, "C").Value + categories(j)
+        Worksheets(sheetNames(6)).Cells(FindPortalMonth.Row + 1 + j, "C").Value = Worksheets(sheetNames(6)).Cells(FindPortalMonth.Row + 1 + j, "C").Value + categories(j)
     Next j
     
     
     
     Set FindRow = Worksheets(sheetNames(7)).Range("B:B").Find(What:="Requested", LookIn:=xlValues)
-    Rows(FindRow.Row).Insert
     
     'Get the Date
     myValue = "01/24/2022"
     Dim standardDate As Variant
     standardDate = Left(CStr(myValue), 5)
-    standardDate = standardDate + "Totals"
+    standardDate = standardDate + " Totals"
     Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "A").Value = standardDate
     Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "B").Value = Worksheets(sheetNames(1)).Cells(294, "L").Value
     Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "C").Value = Worksheets(sheetNames(1)).Cells(294, "M").Value
     Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "D").Value = Worksheets(sheetNames(1)).Cells(294, "N").Value
     Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "E").Value = Worksheets(sheetNames(1)).Cells(294, "O").Value
+    
+    Set FindPortalRow = Worksheets(sheetNames(7)).Range("C:C").Find(What:="In Portal", LookIn:=xlValues)
+    Rows(FindPortalRow.Row).Insert
+    
+    Dim nameMonth As Variant
+    nameMonth = MonthName(Left(myValue, 2))
+    nameMonth = Left(nameMonth, 3)
+    Dim number As Variant
+    number = Right(Left(myValue, 5), 2)
+    number = number + "-" + nameMonth
+    
+    Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 1, "A").Value = number
+    Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 1, "B").Value = Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 2, "B") + requestedPortal
+    Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 1, "C").Value = Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 2, "C")
+    Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 1, "F").Value = number
+    Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 1, "G").Value = Worksheets(sheetNames(7)).Cells(FindPortalRow.Row - 2, "G") + registeredPortal
+    
+    For j = 0 To 3
+        Worksheets(sheetNames(7)).Cells(FindPortalRow.Row + 1 + j, "C").Value = Worksheets(sheetNames(7)).Cells(FindPortalRow.Row + 1 + j, "C").Value + categories(j)
+    Next j
     
     
     
