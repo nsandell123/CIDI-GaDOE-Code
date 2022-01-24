@@ -1,3 +1,4 @@
+Global myValue As Variant
 Sub FindNewUsers()
 
     LRowFirst = Worksheets(sheetNames(4)).Cells(Rows.Count, "A").End(xlUp).Row
@@ -29,7 +30,7 @@ Sub FindNewUsers()
     LastRowWeekly = Worksheets(sheetNames(8)).Cells(Rows.Count, "B").End(xlUp).Row
     LastRowMonthly = Worksheets(sheetNames(9)).Cells(Rows.Count, "B").End(xlUp).Row
 
-    Dim myValue As Variant
+    
     myValue = InputBox("What is today's date? (MM/DD/YYYY)")
     
     Worksheets(sheetNames(9)).Cells(LastRowMonthly, "B") = Str(CLng(Worksheets(sheetNames(9)).Cells(LastRowMonthly, "B")) + counter)
