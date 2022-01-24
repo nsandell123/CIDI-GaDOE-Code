@@ -60,6 +60,49 @@ Sub UpdateRegisterSheets()
         End If
     Next cellplaceholder
     
+    'In Register Monthly, you have to update the Next with the totals from Sheet 1
+    Dim nextPosition As Long
+    nextPosition = 7
+    While StrComp(Worksheets(sheetNames(6)).Cells(nextPosition, "A").Value, "Next") <> 0
+        nextPosition = nextPosition + 1
+    Wend
+    
+    Worksheets(sheetNames(6)).Cells(nextPosition, "B").Value = Worksheets(sheetNames(1)).Cells(294, "L").Value
+    Worksheets(sheetNames(6)).Cells(nextPosition, "C").Value = Worksheets(sheetNames(1)).Cells(294, "M").Value
+    Worksheets(sheetNames(6)).Cells(nextPosition, "D").Value = Worksheets(sheetNames(1)).Cells(294, "N").Value
+    Worksheets(sheetNames(6)).Cells(nextPosition, "E").Value = Worksheets(sheetNames(1)).Cells(294, "O").Value
+    
+    nextPosition = nextPosition + 1
+    While StrComp(Worksheets(sheetNames(6)).Cells(nextPosition, "A").Value, "Next") <> 0
+        nextPosition = nextPosition + 1
+    Wend
+    
+    Worksheets(sheetNames(6)).Cells(nextPosition, "B").Value = Worksheets(sheetNames(6)).Cells(nextPosition, "B").Value + registeredPortal
+    Worksheets(sheetNames(6)).Cells(nextPosition, "G").Value = Worksheets(sheetNames(6)).Cells(nextPosition, "G").Value + requestedPortal
+    
+    Dim j As Long
+    
+    For j = 0 To 3
+        Worksheets(sheetNames(6)).Cells(57 + j, "C").Value = Worksheets(sheetNames(6)).Cells(57 + j, "C").Value + categories(j)
+    Next j
+    
+    
+    
+    Set FindRow = Worksheets(sheetNames(7)).Range("B:B").Find(What:="Requested", LookIn:=xlValues)
+    Rows(FindRow.Row).Insert
+    
+    'Get the Date
+    myValue = "01/24/2022"
+    Dim standardDate As Variant
+    standardDate = Left(CStr(myValue), 5)
+    standardDate = standardDate + "Totals"
+    Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "A").Value = standardDate
+    Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "B").Value = Worksheets(sheetNames(1)).Cells(294, "L").Value
+    Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "C").Value = Worksheets(sheetNames(1)).Cells(294, "M").Value
+    Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "D").Value = Worksheets(sheetNames(1)).Cells(294, "N").Value
+    Worksheets(sheetNames(7)).Cells(FindRow.Row - 1, "E").Value = Worksheets(sheetNames(1)).Cells(294, "O").Value
+    
+    
+    
 
 End Sub
-
