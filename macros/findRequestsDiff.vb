@@ -12,8 +12,8 @@ Sub findRequestsDiff()
     'This next section is dedicated to finding the requests diff in terms of the row number
     Dim Rng1 As Range
     Dim Rng2 As Range
-    Set Rng1 = Worksheets(sheetNames(2)).Range("C1:" + "C" + Right(str(LRowFirst), Len(LRowFirst) - 1))
-    Set Rng2 = Worksheets(sheetNames(3)).Range("C1:" + "C" + Right(str(LRowSecond), Len(LRowSecond) - 1))
+    Set Rng1 = Worksheets(sheetNames(2)).Range("C1:" + "C" + Right(Str(LRowFirst), Len(LRowFirst) - 1))
+    Set Rng2 = Worksheets(sheetNames(3)).Range("C1:" + "C" + Right(Str(LRowSecond), Len(LRowSecond) - 1))
 
     Dim cellplaceholder As Range
     Dim finalString As String
@@ -25,7 +25,7 @@ Sub findRequestsDiff()
             If UBound(numbers) - LBound(numbers) + 1 < counter Then
                 ReDim Preserve numbers(counter)
             End If
-            finalString = finalString + str(cellplaceholder.Value) + vbNewLine
+            finalString = finalString + Str(cellplaceholder.Value) + vbNewLine
         End If
     Next cellplaceholder
     If Len(finalString) = 0 Then
@@ -125,6 +125,24 @@ Sub findRequestsDiff()
         End If
 
     Next numberIndex
+    
+    Dim lastRow As Long
+    lastRow = Worksheets(11).Cells(Rows.Count, "A").End(xlUp).Row
+    Worksheets(11).Cells(lastRow, "B").Value = Worksheets(11).Cells(lastRow, "B").Value + numberLoans
+    Worksheets(11).Cells(lastRow, "F").Value = Worksheets(11).Cells(lastRow, "F").Value + numberConsults
+    
+    Dim lastRowLoans As Long
+    Dim lastRowConsults As Long
+    lastRowLoans = Worksheets(12).Cells(Rows.Count, "A").End(xlUp).Row
+    lastRowConsults = Worksheets(12).Cells(Rows.Count, "T").End(xlUp).Row
+    Worksheets(12).Cells(lastRowLoans + 1, "A").Value = Left(myValue, 5) + " Totals"
+    Worksheets(12).Cells(lastRowLoans + 1, "B").Value = numberLoans
+    Worksheets(12).Cells(lastRowLoans + 1, "T").Value = Left(myValue, 5) + " Totals"
+    Worksheets(12).Cells(lastRowLoans + 1, "U").Value = numberConsults
+    
+    
+    
+    
     
     
     
