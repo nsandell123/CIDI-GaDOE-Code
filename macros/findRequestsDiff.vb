@@ -137,8 +137,8 @@ Sub findRequestsDiff()
     lastRowConsults = Worksheets(12).Cells(Rows.Count, "T").End(xlUp).Row
     Worksheets(12).Cells(lastRowLoans + 1, "A").Value = Left(myValue, 5) + " Totals"
     Worksheets(12).Cells(lastRowLoans + 1, "B").Value = numberProduct
-    Worksheets(12).Cells(lastRowLoans + 1, "T").Value = Left(myValue, 5) + " Totals"
-    Worksheets(12).Cells(lastRowLoans + 1, "U").Value = numberConsult
+    Worksheets(12).Cells(lastRowConsults + 1, "T").Value = Left(myValue, 5) + " Totals"
+    Worksheets(12).Cells(lastRowConsults + 1, "U").Value = numberConsult
     
     
     
