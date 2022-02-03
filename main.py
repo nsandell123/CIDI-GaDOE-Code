@@ -13,7 +13,7 @@ import win32com.client as win32
 os.environ['PATH'] += r";C:\SeleniumDriver"
 excel = win32.gencache.EnsureDispatch('Excel.Application')
 excel.Visible = True
-
+excel.DisplayAlerts = False
 ### Initial Scraping
 
 driver = webdriver.Chrome()
@@ -61,16 +61,16 @@ files = sorted(files, key = os.path.getctime, reverse=True)
 base_name = r"C:\Users\sande\Downloads\GA DoE "
 new_requests_name = base_name + "Requests - " + date + ".csv"
 new_users_name = base_name + "Users - " + date + ".csv"
+
+
 os.rename(files[0], new_users_name)
 os.rename(files[1], new_requests_name)
+
 
 ### Insert into Excel
 
 df_requests = pd.read_csv(new_requests_name)
-df_requests.to_excel('requests_output.xlsx', index=False)
-
 df_users = pd.read_csv(new_users_name)
-df_users.to_excel('users_output.xlsx', index=False)
 
 
 wb = load_workbook(filename=path, read_only=False, keep_vba=True)
@@ -79,6 +79,8 @@ for sheet in wb.sheetnames:
         wb[sheet].title = 'Combined Data ' + date
 ws_requests = wb.create_sheet(index=1)
 ws_requests.title = "GA DoE Requests - " + date
+
+wb.remove(wb[wb.sheetnames[3]])
 
 ws_users = wb.create_sheet(index=3)
 ws_users.title = "GA DoE Users - " + date
@@ -94,11 +96,8 @@ for row in dataframe_to_rows(df_users, index=True, header=True):
 ws_users.delete_rows(2)
 ws_users.delete_cols(1)
 
-wb.remove(wb[wb.sheetnames[5]])
-
 new_file_name = os.getcwd() + "\\" + "Combined Data " + date + ".xlsm"
 wb.save(filename=new_file_name)
-
 
 
 macro_wb = excel.Workbooks.Open(new_file_name)
@@ -110,3 +109,7 @@ excel.Run("\'" + new_file_name + "\'" + "!Module4.FindNewUsers")
 excel.Run("\'" + new_file_name + "\'" + "!Module5.FindRequestsDiff")
 excel.Run("\'" + new_file_name + "\'" + "!Module6.UpdateTable")
 excel.Run("\'" + new_file_name + "\'" + "!Module7.UpdateRegisterSheets")
+
+
+### Delete Users Sheet
+macro_wb.Worksheets(5).Delete()
