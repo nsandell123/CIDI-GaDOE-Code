@@ -113,3 +113,6 @@ excel.Run("\'" + new_file_name + "\'" + "!Module7.UpdateRegisterSheets")
 
 ### Delete Users Sheet
 macro_wb.Worksheets(5).Delete()
+
+os.remove(new_requests_name)
+os.remove(new_users_name)
