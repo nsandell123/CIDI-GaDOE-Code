@@ -139,10 +139,8 @@ Sub findRequestsDiff()
     Worksheets(12).Cells(lastRowLoans + 1, "B").Value = numberProduct
     Worksheets(12).Cells(lastRowConsults + 1, "T").Value = Left(myValue, 5) + " Totals"
     Worksheets(12).Cells(lastRowConsults + 1, "U").Value = numberConsult
-
     Worksheets(12).Activate
     Worksheets(12).Range("A" + CStr(lastRowLoans + 1) + ":" + "B" + CStr(lastRowLoans + 1)).Select
-    
     With Selection.Borders(xlEdgeLeft)
         .LineStyle = xlContinuous
         .ColorIndex = 0
@@ -179,7 +177,7 @@ Sub findRequestsDiff()
         .TintAndShade = 0
         .Weight = xlThin
     End With
-    
+    Worksheets(12).Activate
     Worksheets(12).Range("T" + CStr(lastRowConsults + 1) + ":" + "U" + CStr(lastRowConsults + 1)).Select
     With Selection.Borders(xlEdgeLeft)
         .LineStyle = xlContinuous
