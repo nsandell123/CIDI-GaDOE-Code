@@ -21,6 +21,12 @@ Sub RequestsFormatting()
     Selection.Font.Bold = True
     Selection.RowHeight = 15
     Selection.ColumnWidth = 15
+    'Removing Matthew Blake Records
+    For i = Worksheets(sheetNames(2)).Cells(Rows.Count, 11).End(xlUp).Row To 1 Step -1
+        If Worksheets(sheetNames(2)).Cells(i, 10).Value = "Blake" And Worksheets(sheetNames(2)).Cells(i, 11).Value = "Matthew" Then
+            Worksheets(sheetNames(2)).Cells(i, 11).EntireRow.Delete
+        End If
+    Next i
 End Sub
 Sub UsersFormatting()
 '
