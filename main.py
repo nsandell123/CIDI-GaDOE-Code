@@ -7,6 +7,7 @@ import os
 import os.path
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
 import glob
 from selenium.webdriver.common.by import By
 import win32com.client as win32
@@ -16,7 +17,7 @@ excel.Visible = True
 excel.DisplayAlerts = False
 ### Initial Scraping
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get("https://gatfl.gatech.edu/sri/users/login")
 driver.maximize_window()
 
