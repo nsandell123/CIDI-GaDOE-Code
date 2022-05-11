@@ -83,6 +83,7 @@ ws_requests.title = "GA DoE Requests - " + date
 
 wb.remove(wb[wb.sheetnames[3]])
 
+
 ws_users = wb.create_sheet(index=3)
 ws_users.title = "GA DoE Users - " + date
 
@@ -97,9 +98,11 @@ for row in dataframe_to_rows(df_users, index=True, header=True):
 ws_users.delete_rows(2)
 ws_users.delete_cols(1)
 
+wb.remove(wb[wb.sheetnames[5]])
+
+
 new_file_name = os.getcwd() + "\\" + "Combined Data " + date + ".xlsm"
 wb.save(filename=new_file_name)
-
 
 macro_wb = excel.Workbooks.Open(new_file_name)
 excel.Run("\'" + new_file_name + "\'" + "!Module1.GlobalChecking")
@@ -110,10 +113,6 @@ excel.Run("\'" + new_file_name + "\'" + "!Module4.FindNewUsers")
 excel.Run("\'" + new_file_name + "\'" + "!Module5.FindRequestsDiff")
 excel.Run("\'" + new_file_name + "\'" + "!Module6.UpdateTable")
 excel.Run("\'" + new_file_name + "\'" + "!Module7.UpdateRegisterSheets")
-
-
-### Delete Users Sheet
-macro_wb.Worksheets(5).Delete()
 
 os.remove(new_requests_name)
 os.remove(new_users_name)
