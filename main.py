@@ -15,6 +15,7 @@ os.environ['PATH'] += r";C:\SeleniumDriver"
 excel = win32.gencache.EnsureDispatch('Excel.Application')
 excel.Visible = True
 excel.DisplayAlerts = False
+
 ### Initial Scraping
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -48,33 +49,28 @@ export_requests.click()
 
 
 ### Collect CSV from downloads
-path = str(input("What is the location of the CDR?"))
 name = str(input("What is your account name on Windows?"))
-date = str(input("What is today's date in (MMDDYY)"))
 #r'C:\Users\sande\Downloads'
-folder_path_base = "C:\\Users\\"
-folder_path_suffix = r"\Downloads"
-folder_path = folder_path_base + name + folder_path_suffix
+file_system_base = "C:\\Users\\{name}".format(name=name)
+downloads_folder = r"\Downloads"
+downloads_folder_path = file_system_base + downloads_folder
 file_type = '\*csv'
-files = glob.glob(folder_path + file_type)
+files = glob.glob(downloads_folder_path + file_type)
 
 files = sorted(files, key = os.path.getctime, reverse=True)
-base_name = r"C:\Users\sande\Downloads\GA DoE "
-new_requests_name = base_name + "Requests - " + date + ".csv"
-new_users_name = base_name + "Users - " + date + ".csv"
-
-
-os.rename(files[0], new_users_name)
-os.rename(files[1], new_requests_name)
-
+# files[0] is users and files[1] is requests
 
 ### Insert into Excel
+df_requests = pd.read_csv(files[1])
+df_users = pd.read_csv(files[0])
 
-df_requests = pd.read_csv(new_requests_name)
-df_users = pd.read_csv(new_users_name)
+os.remove(files[0])
+os.remove(files[1])
 
-
+path = str(input("What is the location of the CDR?"))
 wb = load_workbook(filename=path, read_only=False, keep_vba=True)
+
+date = str(input("What is today's date in (MMDDYY)"))
 for sheet in wb.sheetnames:
     if 'Combined Data' in sheet:
         wb[sheet].title = 'Combined Data ' + date
@@ -82,7 +78,6 @@ ws_requests = wb.create_sheet(index=1)
 ws_requests.title = "GA DoE Requests - " + date
 
 wb.remove(wb[wb.sheetnames[3]])
-
 
 ws_users = wb.create_sheet(index=3)
 ws_users.title = "GA DoE Users - " + date
@@ -100,19 +95,15 @@ ws_users.delete_cols(1)
 
 wb.remove(wb[wb.sheetnames[5]])
 
-
 new_file_name = os.getcwd() + "\\" + "Combined Data " + date + ".xlsm"
 wb.save(filename=new_file_name)
 
-macro_wb = excel.Workbooks.Open(new_file_name)
-excel.Run("\'" + new_file_name + "\'" + "!Module1.GlobalChecking")
-excel.Run("\'" + new_file_name + "\'" + "!Module2.RequestsFormatting")
-excel.Run("\'" + new_file_name + "\'" + "!Module2.UsersFormatting")
-excel.Run("\'" + new_file_name + "\'" + "!Module3.UsersDataCleaning")
-excel.Run("\'" + new_file_name + "\'" + "!Module4.FindNewUsers")
-excel.Run("\'" + new_file_name + "\'" + "!Module5.FindRequestsDiff")
-excel.Run("\'" + new_file_name + "\'" + "!Module6.UpdateTable")
-excel.Run("\'" + new_file_name + "\'" + "!Module7.UpdateRegisterSheets")
-
-os.remove(new_requests_name)
-os.remove(new_users_name)
+# macro_wb = excel.Workbooks.Open(new_file_name)
+# excel.Run("\'" + new_file_name + "\'" + "!Module1.GlobalChecking")
+# excel.Run("\'" + new_file_name + "\'" + "!Module2.RequestsFormatting")
+# excel.Run("\'" + new_file_name + "\'" + "!Module2.UsersFormatting")
+# excel.Run("\'" + new_file_name + "\'" + "!Module3.UsersDataCleaning")
+# excel.Run("\'" + new_file_name + "\'" + "!Module4.FindNewUsers")
+# excel.Run("\'" + new_file_name + "\'" + "!Module5.FindRequestsDiff")
+# excel.Run("\'" + new_file_name + "\'" + "!Module6.UpdateTable")
+# excel.Run("\'" + new_file_name + "\'" + "!Module7.UpdateRegisterSheets")
