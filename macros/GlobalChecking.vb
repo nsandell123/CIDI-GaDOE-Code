@@ -1,7 +1,9 @@
 Option Explicit
 Global sheetNames(12) As String
 Global mainWorkbook As Workbook
+Global inputDate As Variant
 Sub GlobalChecking()
+    inputDate = InputBox("What is today's date? (MM/DD/YYYY)")
     Dim LastRowTest As Integer
     Set mainWorkbook = ActiveWorkbook
     If mainWorkbook.Sheets.Count <> 12 Then
@@ -119,13 +121,5 @@ Sub GlobalChecking()
         MsgBox "Sheet 11 should say Loans-Consults WK"
         Exit Sub
     End If
-    
-    
-    
-    
-    
-    
-
-    
 End Sub
 
