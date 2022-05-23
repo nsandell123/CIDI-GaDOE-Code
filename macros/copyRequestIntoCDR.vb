@@ -21,6 +21,24 @@ Sub copyRequestIntoCDR()
         Worksheets(1).Cells(position, "G") = Worksheets(sheetNames(2)).Cells(requestPointer, "B")
         Worksheets(1).Cells(position, "J") = Worksheets(sheetNames(2)).Cells(requestPointer, "C")
         Worksheets(1).Cells(position, "J").NumberFormat = "M/D/YYYY"
+        If Worksheets(sheetNames(2)).Cells(requestPointer, "B").Value = "Product Loan" Or Worksheets(sheetNames(2)).Cells(requestPointer, "B").Value = "Consulting" Then
+            Dim newRowPosition As Integer
+            newRowPosition = Worksheets("Loans & Consults").Cells(Rows.Count, "A").End(xlUp).Row + 1
+            Worksheets("Loans & Consults").Cells(newRowPosition, "A") = Worksheets("Loans & Consults").Cells(newRowPosition - 1, "A") + 1
+            Worksheets("Loans & Consults").Cells(newRowPosition, "B") = Worksheets(sheetNames(2)).Cells(requestPointer, "B")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "C") = Worksheets(sheetNames(2)).Cells(requestPointer, "C")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "C").NumberFormat = "M/D/YYYY"
+            Worksheets("Loans & Consults").Cells(newRowPosition, "G") = Worksheets(sheetNames(2)).Cells(requestPointer, "G")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "H") = Worksheets(sheetNames(2)).Cells(requestPointer, "H")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "I") = Worksheets(sheetNames(2)).Cells(requestPointer, "I")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "J") = Worksheets(sheetNames(2)).Cells(requestPointer, "J")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "K") = Worksheets(sheetNames(2)).Cells(requestPointer, "K")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "L") = Worksheets(sheetNames(2)).Cells(requestPointer, "L")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "M") = Worksheets(sheetNames(2)).Cells(requestPointer, "M")
+            Worksheets("Loans & Consults").Cells(newRowPosition, "N") = Worksheets(sheetNames(2)).Cells(requestPointer, "N")
+            Worksheets("Loans & Consults").Rows(newRowPosition).Borders.LineStyle = xlContinuous
+            Worksheets("Loans & Consults").Rows(newRowPosition).Borders.Weight = xlThin
+        End If
         If Worksheets(sheetNames(2)).Cells(requestPointer, "B").Value = "Software" Then
             Dim Softwares As Variant
             Softwares = Split(Worksheets(sheetNames(2)).Cells(requestPointer, "G").Value, ",")
@@ -54,7 +72,7 @@ Sub copyRequestIntoCDR()
     Next requestPointer
     
     
-    MsgBox "Done copying requests to CDR"
+    MsgBox "Done copying requests to CDR and Loans & Consults"
 
 
 End Sub
