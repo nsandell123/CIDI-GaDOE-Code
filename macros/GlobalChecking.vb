@@ -31,7 +31,9 @@ Sub GlobalChecking()
     Next
     
     If alphabeticalIndex <> LastRowDistricts Then
-        MsgBox "The districts on Sheet 1 are not in alphabetical order" & Str(alphabeticalIndex) & " is out of order"
+        Debug.Print Worksheets(1).Cells(alphabeticalIndex, "E")
+        Debug.Print Worksheets(1).Cells(alphabeticalIndex + 1, "E")
+        MsgBox "The districts on Sheet 1 are not in alphabetical order" & "E" & Str(alphabeticalIndex) & " is out of order"
     End If
     
     'Checking if Sheets are in correct order
@@ -142,6 +144,25 @@ Sub GlobalChecking()
     While Not (IsEmpty(Worksheets(9).Cells(2 + counter, "A")))
         If Not (Dict.Exists(Worksheets(9).Cells(2 + counter, "A").Value)) Then
             MsgBox "In Worksheet 9, Cell A" + Right(Str(2 + counter), Len(Str(2 + counter)) - 1) + "should be one of Jan, Feb, Mar, Apr, May, June, July, Aug, Sept, Oct, Nov, Dec "
+            MsgBox "Be sure to run this module again to (maybe) find other months which are not formatted correctly"
+            Exit Sub
+        End If
+        counter = counter + 1
+    Wend
+    
+    counter = 0
+    While Not (IsEmpty(Worksheets(11).Cells(2 + counter, "A")))
+        If Not (Dict.Exists(Worksheets(11).Cells(2 + counter, "A").Value)) Then
+            MsgBox "In Worksheet 11, Cell A" + Right(Str(2 + counter), Len(Str(2 + counter)) - 1) + "should be one of Jan, Feb, Mar, Apr, May, June, July, Aug, Sept, Oct, Nov, Dec "
+            MsgBox "Be sure to run this module again to (maybe) find other months which are not formatted correctly"
+            Exit Sub
+        End If
+        counter = counter + 1
+    Wend
+    counter = 0
+    While Not (IsEmpty(Worksheets(11).Cells(2 + counter, "E")))
+        If Not (Dict.Exists(Worksheets(11).Cells(2 + counter, "E").Value)) Then
+            MsgBox "In Worksheet 11, Cell E" + Right(Str(2 + counter), Len(Str(2 + counter)) - 1) + "should be one of Jan, Feb, Mar, Apr, May, June, July, Aug, Sept, Oct, Nov, Dec "
             MsgBox "Be sure to run this module again to (maybe) find other months which are not formatted correctly"
             Exit Sub
         End If
