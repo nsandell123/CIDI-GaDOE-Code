@@ -14,28 +14,6 @@ Sub GlobalChecking()
         sheetNames(i) = Worksheets(i).Name
     Next i
     
-    Dim LastRowDistricts As Long
-    LastRowDistricts = Worksheets(1).Cells(Rows.Count, "E").End(xlUp).Row
-    Dim alphabeticalIndex As Integer
-    alphabeticalIndex = 2
-    For i = 2 To LastRowDistricts - 1
-        If IsEmpty(Cells(i, "E")) Or IsEmpty(Cells(i + 1, "E")) Then
-            alphabeticalIndex = alphabeticalIndex + 1
-        Else
-            If StrComp(Cells(i, "E").Value, Cells(i + 1, "E").Value, vbTextCompare) = -1 Or StrComp(Cells(i, "E").Value, Cells(i + 1, "E").Value, vbTextCompare) = 0 Then
-                alphabeticalIndex = alphabeticalIndex + 1
-            Else
-                Exit For
-            End If
-        End If
-    Next
-    
-    If alphabeticalIndex <> LastRowDistricts Then
-        Debug.Print Worksheets(1).Cells(alphabeticalIndex, "E")
-        Debug.Print Worksheets(1).Cells(alphabeticalIndex + 1, "E")
-        MsgBox "The districts on Sheet 1 are not in alphabetical order" & "E" & Str(alphabeticalIndex) & " is out of order"
-    End If
-    
     'Checking if Sheets are in correct order
     Dim regexSheetOne As Object
     Set regexSheetOne = New RegExp
@@ -168,6 +146,36 @@ Sub GlobalChecking()
         End If
         counter = counter + 1
     Wend
+    
+    Dim anchorCellRequested As Integer
+    
+    anchorCellRequested = Worksheets(sheetNames(6)).Range("B:B").Find(What:="Requested Software", LookIn:=xlValues).Row + 1
+    While Not (IsEmpty(Worksheets(6).Cells(2 + anchorCellRequested, "A")))
+        Debug.Print Worksheets(6).Cells(2 + anchorCellRequested, "A").Value
+        If Not (Dict.Exists(Worksheets(6).Cells(2 + anchorCellRequested, "A").Value)) Then
+            MsgBox "In Worksheet 6, Cell A" + Right(Str(2 + anchorCellRequested), Len(Str(2 + anchorCellRequested)) - 1) + "should be one of Jan, Feb, Mar, Apr, May, June, July, Aug, Sept, Oct, Nov, Dec "
+            MsgBox "Be sure to run this module again to (maybe) find other months which are not formatted correctly"
+            Exit Sub
+        End If
+        anchorCellRequested = anchorCellRequested + 1
+    Wend
+    
+    Dim anchorcellRegistered As Integer
+    anchorcellRegistered = Worksheets(sheetNames(6)).Range("G:G").Find(What:="Register in Portal", LookIn:=xlValues).Row + 1
+    While Not (IsEmpty(Worksheets(6).Cells(2 + anchorcellRegistered, "F")))
+        Debug.Print Worksheets(6).Cells(2 + anchorcellRegistered, "F").Value
+        If Not (Dict.Exists(Worksheets(6).Cells(2 + anchorcellRegistered, "F").Value)) Then
+            MsgBox "In Worksheet 6, Cell F" + Right(Str(2 + anchorcellRegistered), Len(Str(2 + anchorcellRegistered)) - 1) + "should be one of Jan, Feb, Mar, Apr, May, June, July, Aug, Sept, Oct, Nov, Dec "
+            MsgBox "Be sure to run this module again to (maybe) find other months which are not formatted correctly"
+            Exit Sub
+        End If
+        anchorcellRegistered = anchorcellRegistered + 1
+    Wend
+    
+    
+    
+    
+    
     
     
     
