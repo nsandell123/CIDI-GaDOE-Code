@@ -36,8 +36,8 @@ Sub copyRequestIntoCDR()
             Worksheets("Loans & Consults").Cells(newRowPosition, "L") = Worksheets(sheetNames(2)).Cells(requestPointer, "L")
             Worksheets("Loans & Consults").Cells(newRowPosition, "M") = Worksheets(sheetNames(2)).Cells(requestPointer, "M")
             Worksheets("Loans & Consults").Cells(newRowPosition, "N") = Worksheets(sheetNames(2)).Cells(requestPointer, "N")
-            Worksheets("Loans & Consults").Rows(newRowPosition).Borders.LineStyle = xlContinuous
-            Worksheets("Loans & Consults").Rows(newRowPosition).Borders.Weight = xlThin
+            Worksheets("Loans & Consults").Range(Worksheets("Loans & Consults").Cells(newRowPosition, "A"), Worksheets("Loans & Consults").Cells(newRowPosition, "A").Offset(0, 13)).Borders.LineStyle = xlContinuous
+            Worksheets("Loans & Consults").Range(Worksheets("Loans & Consults").Cells(newRowPosition, "A"), Worksheets("Loans & Consults").Cells(newRowPosition, "A").Offset(0, 13)).Borders.Weight = xlThin
         End If
         If Worksheets(sheetNames(2)).Cells(requestPointer, "B").Value = "Software" Then
             Dim Softwares As Variant
