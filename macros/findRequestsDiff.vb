@@ -1,8 +1,14 @@
 Option Explicit
 Global rowRequestNumbers() As Long
 Global numberNewRequests As Long
+Global totalLoans As Integer
+Global totalConsults As Integer
 Sub findRequestsDiff()
     Dim numbers() As Long
+    Dim numberLoans As Integer
+    Dim numberConsults As Integer
+    numberLoans = 0
+    numberConsults = 0
     Dim counter As Long
     counter = 0
     Dim request As Variant
@@ -30,15 +36,15 @@ Sub findRequestsDiff()
     For Each request In numbers
         Dim firstName As String
         Dim lastName As String
-        Dim district As String
+        Dim District As String
         Dim requestDate As String
         Dim serviceRequested As String
         firstName = Worksheets(2).Cells(request, "K").Value
         lastName = Worksheets(2).Cells(request, "J").Value
-        district = Worksheets(2).Cells(request, "M").Value
+        District = Worksheets(2).Cells(request, "M").Value
         requestDate = Worksheets(2).Cells(request, "C").Value
         serviceRequested = Worksheets(2).Cells(request, "B").Value
-        finalString = finalString + firstName + " " + lastName + " from District " + district + " requested " + serviceRequested + " on " + requestDate + vbNewLine
+        finalString = finalString + firstName + " " + lastName + " from District " + District + " requested " + serviceRequested + " on " + requestDate + vbNewLine
         If serviceRequested = "Software" Then
             Dim numberOfSoftwareItems As Integer
             Dim softwareTools As String
@@ -47,9 +53,16 @@ Sub findRequestsDiff()
             finalString = finalString + " He/She requested" + Str(numberOfSoftwareItems) + " " + softwareTools + " each." + vbNewLine
         End If
         If serviceRequested = "Product Loan" Then
-            finalString = finalString + " He/She requested " + Worksheets(9).Cells(request, "I") + vbNewLine
+            finalString = finalString + " He/She requested " + Worksheets(2).Cells(request, "I") + vbNewLine
+            numberLoans = numberLoans + 1
         End If
+        If serviceRequested = "Consulting" Then
+            numberConsults = numberConsults + 1
+        End If
+        
     Next
+    totalConsults = numberConsults
+    totalLoans = numberLoans
     numberNewRequests = counter
     counter = 0
     rowRequestNumbers = numbers
@@ -58,5 +71,4 @@ Sub findRequestsDiff()
     End If
     finalString = finalString + "There were a total of" + Str(numberNewRequests) + " requests"
     MsgBox finalString
-    
 End Sub
