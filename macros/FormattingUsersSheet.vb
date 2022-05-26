@@ -15,11 +15,9 @@ Sub UsersFormatting()
         cellplaceholder.NumberFormat = "m/d/yyyy h:mm"
         cellplaceholder.Value = cellplaceholder.Value
     Next cellplaceholder
-    Worksheets(sheetNames(4)).Rows("1:1").Select
-    Selection.Font.Bold = True
-    Selection.RowHeight = 15
-    Selection.ColumnWidth = 20
-    Worksheets(sheetNames(4)).Select
+    Worksheets(4).Rows(1).Font.Bold = True
+    Worksheets(4).Rows(1).RowHeight = 15
+    Worksheets(4).Rows(1).ColumnWidth = 20
     For i = Worksheets(sheetNames(4)).Cells(Rows.Count, 1).End(xlUp).Row To 1 Step -1
         'Deleting Matthew Blake and Andrew Gelinas'
         If Worksheets(sheetNames(4)).Cells(i, 1).Value = "Matthew Blake" Or Worksheets(sheetNames(4)).Cells(i, 1).Value = "Andrew  Gelinas" Then
