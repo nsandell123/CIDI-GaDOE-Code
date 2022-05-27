@@ -1,7 +1,7 @@
 Sub updateRegisterSheetWeekly()
     Dim anchorCellCombined As Integer
     Dim anchorCellSoftware As Integer
-    anchorCellCombined = Worksheets(sheetNames(1)).Range("K:K").Find(What:="Not Yet Prov", LookIn:=xlValues).Row - 7
+    anchorCellCombined = Worksheets(sheetNames(1)).Range("K:K").Find(What:="Not Yet Prov", LookIn:=xlValues).Row - 6
     anchorCellSoftware = 103
     While Not (IsEmpty(Worksheets(7).Cells(anchorCellSoftware, "A")))
         anchorCellSoftware = anchorCellSoftware + 1
@@ -44,4 +44,5 @@ Sub updateRegisterSheetWeekly()
     For j = 0 To 3
         Worksheets(sheetNames(7)).Cells(FindPortalMonth.Row + 1 + j, "C").Value = Worksheets(sheetNames(7)).Cells(FindPortalMonth.Row + 1 + j, "C").Value + totalCategories(j)
     Next j
+    MsgBox "Finished Updating Register Sheet Weekly"            
 End Sub
