@@ -44,7 +44,7 @@ Sub UpdateTable()
     Worksheets(sheetNames(1)).Cells(LRowFirst, 11).Offset(-6, 4) = Worksheets(sheetNames(1)).Cells(LRowFirst, 11).Offset(-11, 4)
     
     
-    
+    MsgBox "Finished Updating Table at the bottom of the CDR"
     
     
     
