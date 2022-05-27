@@ -31,6 +31,10 @@ Sub findRequestsDiff()
             counter = counter + 1
         End If
     Next cellplaceholder
+    If counter = 0 Then
+        MsgBox "There were no new requests"
+        Exit Sub
+    End If
     'Now I will focus on building the finalString
     finalString = finalString + "NEW REQUESTS: " + vbNewLine
     For Each request In numbers
@@ -60,15 +64,12 @@ Sub findRequestsDiff()
             numberConsults = numberConsults + 1
         End If
         
-    Next
+    Next request
     totalConsults = numberConsults
     totalLoans = numberLoans
     numberNewRequests = counter
     counter = 0
     rowRequestNumbers = numbers
-    If Len(finalString) = 0 Then
-        finalString = "No new requests"
-    End If
     finalString = finalString + "There were a total of" + Str(numberNewRequests) + " requests"
     MsgBox finalString
 End Sub
