@@ -64,5 +64,6 @@ Sub updateRegisterMonthly()
     For j = 0 To 3
         Worksheets(sheetNames(6)).Cells(FindPortalMonth.Row + 1 + j, "C").Value = Worksheets(sheetNames(6)).Cells(FindPortalMonth.Row + 1 + j, "C").Value + totalCategories(j)
     Next j
+    MsgBox "Finished Updating Register Software Monthly"
 
 End Sub
