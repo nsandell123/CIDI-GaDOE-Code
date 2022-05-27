@@ -18,7 +18,7 @@ Sub findNewDistricts()
     Set UserRange1 = Worksheets(sheetNames(4)).Range("G1:" + "G" + Right(Str(LRowUsers1), Len(LRowUsers1) - 1))
     Set UserRange2 = Worksheets(sheetNames(5)).Range("G1:" + "G" + Right(Str(LRowUsers2), Len(LRowUsers2) - 1))
     
-    Dim categories() As Long
+    Dim categories() As Variant
     'Local Districts, State Schools, Charters, GNETS
     ReDim categories(4)
     
@@ -43,7 +43,7 @@ Sub findNewDistricts()
             End If
         End If
     Next cellplaceholder
-    If finalString = "" Then
+    If StrComp(finalString, "NEW DISTRICTS REGISTERED: " + vbNewLine, vbTextCompare) = 0 Then
         MsgBox "No new districts have registered in the portal"
     Else
         MsgBox finalString
@@ -68,7 +68,7 @@ Sub findNewDistricts()
             finalStringRequests = finalStringRequests + cellplaceholder.Value + cellplaceholder.Offset(0, 1).Value + vbNewLine
         End If
     Next cellplaceholder
-    If finalStringRequests = "" Then
+    If StrComp(finalStringRequests, "NEW DISTRICTS REQUESTING: " + vbNewLine, vbTextCompare) = 0 Then
         MsgBox "No new districts in the portal that are requesting software"
     Else
         MsgBox finalStringRequests
@@ -76,6 +76,7 @@ Sub findNewDistricts()
     
     totalRegistered = registeredPortal
     totalRequested = requestedPortal
+    ReDim Preserve totalCategories(UBound(categories) - LBound(categories) + 1)
     totalCategories = categories
 
 End Sub
