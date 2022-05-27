@@ -1,5 +1,9 @@
 Sub copyRequestIntoCDR()
     Dim requestPointer As Variant
+    If numberNewRequests = 0 Then
+        MsgBox "No New Requests"
+        Exit Sub
+    End If
     For Each requestPointer In rowRequestNumbers
         Dim position As Integer
         position = 2
