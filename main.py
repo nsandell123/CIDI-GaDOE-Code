@@ -75,12 +75,12 @@ for sheet in wb.sheetnames:
     if 'Combined Data' in sheet:
         wb[sheet].title = 'Combined Data ' + date
 ws_requests = wb.create_sheet(index=1)
-ws_requests.title = "GA DoE Requests - " + date
+ws_requests.title = "GA DoE Requests " + date
 
 wb.remove(wb[wb.sheetnames[3]])
 
 ws_users = wb.create_sheet(index=3)
-ws_users.title = "GA DoE Users - " + date
+ws_users.title = "GA DoE Users " + date
 
 for row in dataframe_to_rows(df_requests, index=True, header=True):
     ws_requests.append(row)
