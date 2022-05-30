@@ -170,5 +170,5 @@ Sub GlobalChecking()
         anchorCellRegistered = anchorCellRegistered + 1
     Wend
     
-    
+    MsgBox "All Tests Passed"
 End Sub
