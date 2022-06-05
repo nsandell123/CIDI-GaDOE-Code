@@ -9,14 +9,14 @@ Sub findNewDistricts()
     
     Dim LRowUsers1 As Long
     Dim LRowUsers2 As Long
-    LRowUsers1 = Worksheets(sheetNames(4)).Cells(Rows.Count, "G").End(xlUp).Row
-    LRowUsers2 = Worksheets(sheetNames(5)).Cells(Rows.Count, "G").End(xlUp).Row
-    
+    LRowUsers1 = Worksheets(5).Cells(Rows.Count, "G").End(xlUp).Row
+    LRowUsers2 = Worksheets(6).Cells(Rows.Count, "G").End(xlUp).Row
+
     Dim UserRange1 As Range
     Dim UserRange2 As Range
     
-    Set UserRange1 = Worksheets(sheetNames(4)).Range("G1:" + "G" + Right(Str(LRowUsers1), Len(LRowUsers1) - 1))
-    Set UserRange2 = Worksheets(sheetNames(5)).Range("G1:" + "G" + Right(Str(LRowUsers2), Len(LRowUsers2) - 1))
+    Set UserRange1 = Worksheets(5).Range("G1:" + "G" + Right(Str(LRowUsers1), Len(LRowUsers1) - 1))
+    Set UserRange2 = Worksheets(6).Range("G1:" + "G" + Right(Str(LRowUsers2), Len(LRowUsers2) - 1))
     
     Dim categories() As Variant
     'Local Districts, State Schools, Charters, GNETS
@@ -50,14 +50,14 @@ Sub findNewDistricts()
     End If
     Dim LRowRequests1 As Long
     Dim LRowRequests2 As Long
-    LRowRequests1 = Worksheets(sheetNames(2)).Cells(Rows.Count, "M").End(xlUp).Row
-    LRowRequests2 = Worksheets(sheetNames(3)).Cells(Rows.Count, "M").End(xlUp).Row
-    
+    LRowRequests1 = Worksheets(3).Cells(Rows.Count, "M").End(xlUp).Row
+    LRowRequests2 = Worksheets(4).Cells(Rows.Count, "M").End(xlUp).Row
+
     Dim RequestsRange1 As Range
     Dim RequestsRange2 As Range
     
-    Set RequestsRange1 = Worksheets(sheetNames(2)).Range("M1:" + "M" + Right(Str(LRowRequests1), Len(LRowRequests1) - 1))
-    Set RequestsRange2 = Worksheets(sheetNames(3)).Range("M1:" + "M" + Right(Str(LRowRequests2), Len(LRowRequests2) - 1))
+    Set RequestsRange1 = Worksheets(3).Range("M1:" + "M" + Right(Str(LRowRequests1), Len(LRowRequests1) - 1))
+    Set RequestsRange2 = Worksheets(4).Range("M1:" + "M" + Right(Str(LRowRequests2), Len(LRowRequests2) - 1))
     
     
     Dim finalStringRequests As String

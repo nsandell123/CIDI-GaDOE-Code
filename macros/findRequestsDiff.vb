@@ -1,4 +1,3 @@
-Option Explicit
 Global rowRequestNumbers() As Long
 Global numberNewRequests As Long
 Global totalLoans As Integer
@@ -14,13 +13,13 @@ Sub findRequestsDiff()
     Dim request As Variant
     Dim LRowFirst As Long
     Dim LRowSecond As Long
-    LRowFirst = Worksheets(sheetNames(2)).Cells(Rows.Count, "C").End(xlUp).Row
-    LRowSecond = Worksheets(sheetNames(3)).Cells(Rows.Count, "C").End(xlUp).Row
+    LRowFirst = Worksheets(3).Cells(Rows.Count, "C").End(xlUp).Row
+    LRowSecond = Worksheets(4).Cells(Rows.Count, "C").End(xlUp).Row
     'This next section is dedicated to finding the requests diff in terms of the row number
     Dim Rng1 As Range
     Dim Rng2 As Range
-    Set Rng1 = Worksheets(sheetNames(2)).Range("C1:" + "C" + Right(Str(LRowFirst), Len(LRowFirst) - 1))
-    Set Rng2 = Worksheets(sheetNames(3)).Range("C1:" + "C" + Right(Str(LRowSecond), Len(LRowSecond) - 1))
+    Set Rng1 = Worksheets(3).Range("C1:" + "C" + Right(Str(LRowFirst), Len(LRowFirst) - 1))
+    Set Rng2 = Worksheets(4).Range("C1:" + "C" + Right(Str(LRowSecond), Len(LRowSecond) - 1))
 
     Dim cellplaceholder As Range
     Dim finalString As String
@@ -43,21 +42,21 @@ Sub findRequestsDiff()
         Dim District As String
         Dim requestDate As String
         Dim serviceRequested As String
-        firstName = Worksheets(2).Cells(request, "K").Value
-        lastName = Worksheets(2).Cells(request, "J").Value
-        District = Worksheets(2).Cells(request, "M").Value
-        requestDate = Worksheets(2).Cells(request, "C").Value
-        serviceRequested = Worksheets(2).Cells(request, "B").Value
+        firstName = Worksheets(3).Cells(request, "K").Value
+        lastName = Worksheets(3).Cells(request, "J").Value
+        District = Worksheets(3).Cells(request, "M").Value
+        requestDate = Worksheets(3).Cells(request, "C").Value
+        serviceRequested = Worksheets(3).Cells(request, "B").Value
         finalString = finalString + firstName + " " + lastName + " from District " + District + " requested " + serviceRequested + " on " + requestDate + vbNewLine
         If serviceRequested = "Software" Then
             Dim numberOfSoftwareItems As Integer
             Dim softwareTools As String
-            numberOfSoftwareItems = Worksheets(2).Cells(request, "H").Value
-            softwareTools = Worksheets(2).Cells(request, "G").Value
+            numberOfSoftwareItems = Worksheets(3).Cells(request, "H").Value
+            softwareTools = Worksheets(3).Cells(request, "G").Value
             finalString = finalString + " He/She requested" + Str(numberOfSoftwareItems) + " " + softwareTools + " each." + vbNewLine
         End If
         If serviceRequested = "Product Loan" Then
-            finalString = finalString + " He/She requested " + Worksheets(2).Cells(request, "I") + vbNewLine
+            finalString = finalString + " He/She requested " + Worksheets(3).Cells(request, "I") + vbNewLine
             numberLoans = numberLoans + 1
         End If
         If serviceRequested = "Consulting" Then

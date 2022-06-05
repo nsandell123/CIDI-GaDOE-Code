@@ -2,14 +2,14 @@ Global myValue As Variant
 Global numberNewUsers As Integer
 Sub FindNewUsers()
 
-    LRowFirst = Worksheets(sheetNames(4)).Cells(Rows.Count, "A").End(xlUp).Row
-    LRowSecond = Worksheets(sheetNames(5)).Cells(Rows.Count, "A").End(xlUp).Row
-    
+    LRowFirst = Worksheets(5).Cells(Rows.Count, "A").End(xlUp).Row
+    LRowSecond = Worksheets(6).Cells(Rows.Count, "A").End(xlUp).Row
+
     Dim Rng1 As Range
     Dim Rng2 As Range
 
-    Set Rng1 = Worksheets(sheetNames(4)).Range("A1:" + "A" + Right(Str(LRowFirst), Len(LRowFirst)))
-    Set Rng2 = Worksheets(sheetNames(5)).Range("A1:" + "A" + Right(Str(LRowSecond), Len(LRowSecond)))
+    Set Rng1 = Worksheets(5).Range("A1:" + "A" + Right(Str(LRowFirst), Len(LRowFirst)))
+    Set Rng2 = Worksheets(6).Range("A1:" + "A" + Right(Str(LRowSecond), Len(LRowSecond)))
 
     Dim cellplaceholder As Range
     Dim finalString As String

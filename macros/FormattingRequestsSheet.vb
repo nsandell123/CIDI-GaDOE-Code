@@ -5,9 +5,9 @@ Sub RequestsFormatting()
 
 '
     Dim LRowFirst As Long
-    LRowFirst = Worksheets(sheetNames(2)).Cells(Rows.Count, "C").End(xlUp).Row
+    LRowFirst = Worksheets(3).Cells(Rows.Count, "C").End(xlUp).Row
     Dim Rng1 As Range
-    Set Rng1 = Worksheets(sheetNames(2)).Range("C1:" + "C" + Right(Str(LRowFirst), Len(LRowFirst) - 1))
+    Set Rng1 = Worksheets(3).Range("C1:" + "C" + Right(Str(LRowFirst), Len(LRowFirst) - 1))
     
     Dim cellplaceholder As Range
     
@@ -15,16 +15,16 @@ Sub RequestsFormatting()
         cellplaceholder.NumberFormat = "m/d/yyyy"
         cellplaceholder.Value = cellplaceholder.Value
     Next cellplaceholder
-    
-    Worksheets(sheetNames(2)).Select
-    Worksheets(sheetNames(2)).Rows("1:1").Select
+
+    Worksheets(3).Select
+    Worksheets(3).Rows("1:1").Select
     Selection.Font.Bold = True
     Selection.RowHeight = 15
     Selection.ColumnWidth = 15
     'Removing Matthew Blake Records
-    For i = Worksheets(sheetNames(2)).Cells(Rows.Count, 11).End(xlUp).Row To 1 Step -1
-        If Worksheets(sheetNames(2)).Cells(i, 10).Value = "Blake" And Worksheets(sheetNames(2)).Cells(i, 11).Value = "Matthew" Then
-            Worksheets(sheetNames(2)).Cells(i, 11).EntireRow.Delete
+    For i = Worksheets(3).Cells(Rows.Count, 11).End(xlUp).Row To 1 Step -1
+        If Worksheets(3).Cells(i, 10).Value = "Blake" And Worksheets(3).Cells(i, 11).Value = "Matthew" Then
+            Worksheets(3).Cells(i, 11).EntireRow.Delete
         End If
     Next i
 End Sub

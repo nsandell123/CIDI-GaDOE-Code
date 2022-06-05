@@ -74,12 +74,12 @@ date = str(input("What is today's date in (MMDDYY)"))
 for sheet in wb.sheetnames:
     if 'Combined Data' in sheet:
         wb[sheet].title = 'Combined Data ' + date
-ws_requests = wb.create_sheet(index=1)
+ws_requests = wb.create_sheet(index=2)
 ws_requests.title = "GA DoE Requests " + date
 
-wb.remove(wb[wb.sheetnames[3]])
+wb.remove(wb[wb.sheetnames[4]])
 
-ws_users = wb.create_sheet(index=3)
+ws_users = wb.create_sheet(index=4)
 ws_users.title = "GA DoE Users " + date
 
 for row in dataframe_to_rows(df_requests, index=True, header=True):
@@ -93,7 +93,7 @@ for row in dataframe_to_rows(df_users, index=True, header=True):
 ws_users.delete_rows(2)
 ws_users.delete_cols(1)
 
-wb.remove(wb[wb.sheetnames[5]])
+wb.remove(wb[wb.sheetnames[6]])
 
 new_file_name = os.getcwd() + "\\" + "Combined Data " + date + ".xlsm"
 wb.save(filename=new_file_name)

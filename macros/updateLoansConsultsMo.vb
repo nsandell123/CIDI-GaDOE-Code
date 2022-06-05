@@ -15,9 +15,9 @@ Sub updateLoansConsultsMo()
     c.Add "Dec", "12"
     
     Dim LastRowColumnA As Integer
-    LastRowColumnA = Worksheets(11).Cells(Rows.Count, "A").End(xlUp).Row
+    LastRowColumnA = Worksheets(12).Cells(Rows.Count, "A").End(xlUp).Row
     Dim anchorCell As Range
-    Set anchorCell = Worksheets(11).Cells(LastRowColumnA, "A")
+    Set anchorCell = Worksheets(12).Cells(LastRowColumnA, "A")
     Dim actualMonthNumber As String
     actualMonthNumber = Right(Str(CInt(Left(inputDate, 2))), 1)
     Dim mappedActualMonthNumber As String
@@ -31,9 +31,9 @@ Sub updateLoansConsultsMo()
     End If
     
     Dim LastRowColumnE As Integer
-    LastRowColumnE = Worksheets(11).Cells(Rows.Count, "E").End(xlUp).Row
+    LastRowColumnE = Worksheets(12).Cells(Rows.Count, "E").End(xlUp).Row
     Dim anchorCellE As Range
-    Set anchorCellE = Worksheets(11).Cells(LastRowColumnE, "E")
+    Set anchorCellE = Worksheets(12).Cells(LastRowColumnE, "E")
     Dim actualMonthNumberE As String
     actualMonthNumberE = Right(Str(CInt(Left(inputDate, 2))), 1)
     Dim mappedActualMonthNumberE As String
